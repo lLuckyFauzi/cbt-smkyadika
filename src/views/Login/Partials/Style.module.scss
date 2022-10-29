@@ -1,0 +1,11 @@
+.backdrop {
+    width: 40%;
+    min-height: 100vh;
+    border-radius: 10px;
+    text-align: center;
+    background-image: linear-gradient(to bottom right ,rgba(8, 183, 246, 1), rgba(10, 133, 237, 1));
+
+    .ImageContainer {
+        padding-top: 120px;
+    }
+}

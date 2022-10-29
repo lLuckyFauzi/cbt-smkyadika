@@ -9,7 +9,7 @@ function MyApp(props: AppProps) {
   return (
     <>
       <Head>
-        <title>Kykys</title>
+        <title>Kookys</title>
       </Head>
       {layout}
     </>
