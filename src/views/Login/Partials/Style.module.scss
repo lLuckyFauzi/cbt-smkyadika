@@ -1,11 +1,19 @@
 .backdrop {
-    width: 40%;
+    width: 48%;
     min-height: 100vh;
     border-radius: 10px;
     text-align: center;
     background-image: linear-gradient(to bottom right ,rgba(8, 183, 246, 1), rgba(10, 133, 237, 1));
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    .ImageContainer {
+    .Container {
         padding-top: 120px;
     }
+}
+
+.form {
+    width: 48%;
+    min-height: 100vh;
 }

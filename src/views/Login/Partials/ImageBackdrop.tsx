@@ -7,39 +7,57 @@ import ImgBackdropStyle from "./Style.module.scss";
 const ImageBackdrop = () => {
   return (
     <div className={ImgBackdropStyle["backdrop"]}>
-      <div className={ImgBackdropStyle["ImageContainer"]}>
-        <Image width={"376px"} height={"456px"} src={Teacher} alt="Teacher" />
-        <div>
-          <Text
-            style={{
-              color: "white",
-              fontWeight: 700,
-            }}
-            size={35}
-          >
-            Hello Teacher
-          </Text>
+      <div className={ImgBackdropStyle["Container"]}>
+        <div
+          style={{
+            paddingLeft: "146px",
+            paddingRight: "146px",
+          }}
+        >
+          <Image src={Teacher} alt="Teacher" />
         </div>
-        <div>
-          <Text
+        <div
+          style={{
+            paddingLeft: "122px",
+            paddingRight: "122px",
+          }}
+        >
+          <div>
+            <Text
+              style={{
+                color: "white",
+                fontWeight: 700,
+              }}
+              size={25}
+            >
+              Hello Teacher
+            </Text>
+          </div>
+          <div
             style={{
-              color: "white",
-              fontWeight: 600,
+              marginTop: "10px",
             }}
-            size={25}
           >
-            Ayo masukkan soal untuk ujian
-          </Text>
-          <br />
-          <Text
-            style={{
-              color: "white",
-              fontWeight: 600,
-            }}
-            size={25}
-          >
-            para siswa
-          </Text>
+            <Text
+              style={{
+                color: "white",
+                fontWeight: 600,
+              }}
+              size={15}
+            >
+              Ayo masukkan soal untuk ujian
+            </Text>
+            <br />
+            <Text
+              style={{
+                color: "white",
+                fontWeight: 600,
+              }}
+              size={15}
+            >
+              para siswa
+            </Text>
+          </div>
         </div>
       </div>
     </div>
