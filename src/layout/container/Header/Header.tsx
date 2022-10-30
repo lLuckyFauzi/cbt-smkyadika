@@ -1,9 +1,27 @@
-import React from 'react'
+import React, { ReactNode } from "react";
+import { Layout } from "antd";
+import TitleHead from "./Partials/TitleHead";
 
-const Header = () => {
-  return (
-    <div>Header</div>
-  )
+interface HeaderProps {
+  children?: ReactNode;
 }
 
-export default Header
+const Header = (props: HeaderProps) => {
+  const { children } = props;
+  const { Header } = Layout;
+
+  return (
+    <Header
+      style={{
+        backgroundColor: "white",
+        marginRight: "72px",
+        minWidth: "85%",
+      }}
+    >
+      <TitleHead />
+      {children}
+    </Header>
+  );
+};
+
+export default Header;

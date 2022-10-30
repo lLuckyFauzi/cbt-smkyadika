@@ -1,0 +1,21 @@
+.box {
+    border: 1px solid #B8AFAF;
+    cursor: pointer;
+    transition: 0.2s;
+
+    .titleContainer {
+        padding: 7px 15px;
+        color: rgb(0, 0, 0);
+        font-family: "Karla";
+        transition: 0.2s;
+    }
+}
+.box:hover {
+    box-shadow: 0px 1px 5px 1px #0a87ed71;
+    border: none;
+}
+.box:hover .titleContainer {
+    background-color: #0A85ED;
+    color: rgb(255, 255, 255);
+}
+

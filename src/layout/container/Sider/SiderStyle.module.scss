@@ -1,0 +1,42 @@
+.sider {
+    padding: 0px 32px;
+    font-family: "Karla";
+    font-size: 15px;
+    font-weight: 400;
+    min-width: 100vh;
+    background-image: linear-gradient(to bottom right, rgba(10, 133, 237, 1), rgba(8, 183, 246, 1));
+    :global {
+        .ant-menu {
+            background-color: #08B7F6;
+            height: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            margin-top: 68px;
+            color: white;
+            gap: 5px;
+        }
+        .ant-menu-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+        }
+        .ant-menu:hover {
+            background-color: #0A85ED;
+        }
+        .ant-menu-inline, .ant-menu-vertical, .ant-menu-vertical-left {
+            border: none;
+        }
+        .ant-menu-light .ant-menu-item:hover, .ant-menu-light .ant-menu-item-active {
+            color: white;
+        }
+        .ant-menu-item-selected {
+            color: white;
+        }
+        .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+            background-color: transparent;
+        }
+    }
+}

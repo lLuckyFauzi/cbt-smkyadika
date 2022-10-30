@@ -3,6 +3,9 @@ import BtnPrimary from "../../../components/Button/Primary/Primary";
 import InputText from "../../../components/Input/InputText";
 import Text from "../../../components/Typography/Text";
 import LoginFormStyle from "./Style.module.scss";
+import EmailIcon from "../../../public/image/icons/Email.png";
+import PassIcon from "../../../public/image/icons/Password.png";
+import Image from "next/image";
 
 const LoginForm = () => {
   return (
@@ -60,7 +63,11 @@ const LoginForm = () => {
           </Text>
           <br />
           <Text size={20} style={{ fontWeight: 200, color: "#023E7D" }}>
-            Welcome! Please enter your detail
+            Hello Teacher, How's your day? hope it's good!
+          </Text>
+          <br />
+          <Text size={20} style={{ fontWeight: 200, color: "#023E7D" }}>
+            Please enter your detail.
           </Text>
           <form
             style={{
@@ -77,6 +84,7 @@ const LoginForm = () => {
               }}
             >
               <InputText
+                icons={<Image src={EmailIcon} width={"28px"} height={"28px"} />}
                 label
                 labelText={"Email"}
                 placeholder={"Enter Your Email"}
@@ -92,6 +100,7 @@ const LoginForm = () => {
               }}
             >
               <InputText
+                icons={<Image src={PassIcon} width={"28px"} height={"28px"} />}
                 label
                 labelText={"Password"}
                 placeholder={"Enter Your Password"}
