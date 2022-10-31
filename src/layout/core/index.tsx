@@ -11,16 +11,18 @@ const LayoutDefault = (props: AppProps) => {
 
   if (router.pathname !== "/login") {
     return (
-      <Layout
-        style={{
-          backgroundColor: "white",
-        }}
-      >
-        <Sider />
-        <Header>
-          <Component {...pageProps} />
-        </Header>
-      </Layout>
+      <>
+        <Layout
+          style={{
+            backgroundColor: "white",
+          }}
+        >
+          <Sider />
+          <Header>
+            <Component {...pageProps} />
+          </Header>
+        </Layout>
+      </>
     );
   } else {
     return (

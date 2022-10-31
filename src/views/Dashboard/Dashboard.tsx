@@ -1,23 +1,17 @@
 import React from "react";
-import Text from "../../components/Typography/Text";
 import Departement from "./Partials/Departement";
+import Title from "./Partials/Title";
+import TableData from "./Partials/TableList";
 
 const Dashboard = () => {
   return (
-    <div>
-      <Text
-        size={25}
-        style={{ height: "25px", fontWeight: 800, display: "block" }}
-      >
-        Jurusan
-      </Text>
-      <Text
-        size={15}
-        style={{ fontWeight: 300, color: "#616161", display: "block" }}
-      >
-        Pilih jurusan agar dapat menambahkan Mata Pelajaran untuk ulangan
-      </Text>
-
+    <div
+      style={{
+        minWidth: "70vw",
+        height: "100vh",
+      }}
+    >
+      <Title />
       <div>
         <div
           style={{
@@ -47,6 +41,7 @@ const Dashboard = () => {
           />
         </div>
       </div>
+      <TableData />
     </div>
   );
 };

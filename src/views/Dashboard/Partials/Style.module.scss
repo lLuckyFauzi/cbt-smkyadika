@@ -19,3 +19,26 @@
     color: rgb(255, 255, 255);
 }
 
+
+
+.tableContainer {
+    border-radius: 12px;
+    padding: 5px 40px 5px 40px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border: 1px solid gray;
+    position: relative;
+
+    .table {
+        :global {
+            .ant-table-thead tr th {
+                border-top: 1px solid gray;
+                border-bottom: 1px solid gray;
+            }
+
+            .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+                border: 1px solid gray;
+            }
+        }
+    }
+}

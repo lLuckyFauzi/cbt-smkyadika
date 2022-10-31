@@ -15,7 +15,7 @@ const Header = (props: HeaderProps) => {
       style={{
         backgroundColor: "white",
         marginRight: "72px",
-        minWidth: "85%",
+        minWidth: "80%",
       }}
     >
       <TitleHead />
