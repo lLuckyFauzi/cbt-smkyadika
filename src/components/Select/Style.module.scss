@@ -1,0 +1,11 @@
+.select {
+    :global {
+        .ant-select {
+            width: 139px;
+            height: 34px;
+        }
+        .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+            border-radius: 8px;
+        }
+    }
+}

@@ -1,5 +1,6 @@
 import { Button } from "antd";
-import React, { ReactNode } from "react";
+import Link from "next/link";
+import React, { CSSProperties, ReactNode } from "react";
 import Styling from "../ButtonStyle.module.scss";
 
 interface ButtonProps {
@@ -7,19 +8,22 @@ interface ButtonProps {
   onClick?: () => void;
   disabled?: boolean;
   children?: ReactNode;
+  style?: CSSProperties;
+  icon?: ReactNode;
+  href?: string;
 }
 
 const BtnPrimary = (props: ButtonProps) => {
-  const { className, onClick, disabled, children } = props;
+  const { className, onClick, disabled, children, style, icon, href } = props;
 
   return (
-    <div
-      className={className || Styling.primary}
-      style={{ textAlign: "center", marginTop: "51px" }}
-    >
-      <Button type="link" onClick={onClick} disabled={disabled}>
-        {children || "Button"}
-      </Button>
+    <div className={className || Styling.primary}>
+      <Link href={href || "#"}>
+        <Button style={style} type="link" onClick={onClick} disabled={disabled}>
+          {icon}
+          {children || "Button"}
+        </Button>
+      </Link>
     </div>
   );
 };

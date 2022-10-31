@@ -1,27 +1,30 @@
-import React from "react";
-import { Table } from "antd";
+import React, { ReactNode } from "react";
+import { Popconfirm, Table } from "antd";
 import { ColumnsType } from "antd/lib/table";
 import Text from "../../../components/Typography/Text";
-import { Select } from "antd";
 import BtnPrimary from "../../../components/Button/Primary/Primary";
 import TableStyle from "./Style.module.scss";
+import SelectCompo from "../../../components/Select/SelectCompo";
+import { Select } from "antd";
+import AddIcon from "../../../public/image/icons/Add.png";
+import Image from "next/image";
+import TrashIcon from "../../../public/image/icons/Trash.png";
 
 const TableData = () => {
   const { Option } = Select;
-
   interface DataType {
     key: React.Key;
-    nama: string;
+    namaMapel: string;
     tingkat: number;
     namaGuru: string;
     tanggal: string;
-    action: string;
+    action: ReactNode;
   }
 
   const columns: ColumnsType<DataType> = [
     {
-      title: "Nama",
-      dataIndex: "nama",
+      title: "Nama Mapel",
+      dataIndex: "namaMapel",
     },
     {
       title: "Tingkat",
@@ -32,7 +35,7 @@ const TableData = () => {
       dataIndex: "namaGuru",
     },
     {
-      title: "Tanggal Dibuat",
+      title: "Tanggal Pelaksanaan",
       dataIndex: "tanggal",
     },
     {
@@ -44,27 +47,69 @@ const TableData = () => {
   const data: DataType[] = [
     {
       key: "1",
-      nama: "John Brown",
-      tingkat: 32,
-      namaGuru: "New York No. 1 Lake Pa",
+      namaMapel: "PKN",
+      tingkat: 12,
+      namaGuru: "Bu Desty",
       tanggal: "22 October 2022",
-      action: "Hapus",
+      action: (
+        <Popconfirm
+          placement="topLeft"
+          title="Are you sure?"
+          onConfirm={() => {}}
+          onCancel={() => {}}
+        >
+          <Image
+            style={{ cursor: "pointer" }}
+            src={TrashIcon}
+            width={"26px"}
+            height={"26px"}
+          />
+        </Popconfirm>
+      ),
     },
     {
       key: "2",
-      nama: "Jim Green",
-      tingkat: 42,
-      namaGuru: "London No. 1 Lake Park",
+      namaMapel: "Bahasa Inggris",
+      tingkat: 12,
+      namaGuru: "Ms Fitri",
       tanggal: "22 October 2022",
-      action: "Hapus",
+      action: (
+        <Popconfirm
+          placement="topLeft"
+          title="Are you sure?"
+          onConfirm={() => {}}
+          onCancel={() => {}}
+        >
+          <Image
+            style={{ cursor: "pointer" }}
+            src={TrashIcon}
+            width={"26px"}
+            height={"26px"}
+          />
+        </Popconfirm>
+      ),
     },
     {
       key: "3",
-      nama: "Joe Black",
-      tingkat: 32,
-      namaGuru: "Sidney No. 1 Lake Park",
+      namaMapel: "Basis Data",
+      tingkat: 11,
+      namaGuru: "Pak Yoga",
       tanggal: "22 October 2022",
-      action: "Hapus",
+      action: (
+        <Popconfirm
+          placement="topLeft"
+          title="Are you sure?"
+          onConfirm={() => {}}
+          onCancel={() => {}}
+        >
+          <Image
+            style={{ cursor: "pointer" }}
+            src={TrashIcon}
+            width={"26px"}
+            height={"26px"}
+          />
+        </Popconfirm>
+      ),
     },
   ];
 
@@ -84,21 +129,22 @@ const TableData = () => {
         style={{
           position: "absolute",
           right: "40px",
-          top: "-35px",
+          top: "20px",
         }}
       >
-        <BtnPrimary />
+        <BtnPrimary
+          href="/insert"
+          icon={<Image src={AddIcon} width={"20px"} height={"20px"} />}
+          style={{
+            padding: "8px 32px",
+          }}
+        >
+          Tambah
+        </BtnPrimary>
       </div>
-      <div
-        style={{
-          display: "flex",
-          marginBottom: "30px",
-        }}
-      >
-        <Select defaultValue={"Jack"}>
-          <Option value="jak">Jack</Option>
-        </Select>
-      </div>
+      <SelectCompo>
+        <Option>Jake</Option>
+      </SelectCompo>
       <Table
         className={TableStyle.table}
         style={{

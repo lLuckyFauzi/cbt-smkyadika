@@ -1,11 +1,29 @@
-import Image from "next/image";
-import React from "react";
+import React, { ReactNode, useState } from "react";
 import DepartStyle from "./Style.module.scss";
-import CodeTyping from "../../../public/image/CodeTyping.png";
 
-const Departement = () => {
+interface ImageProps {
+  active?: boolean;
+  image?: ReactNode;
+  onClick?: () => void;
+  title: string;
+}
+
+const Departement = (props: ImageProps) => {
+  const { image, onClick, title } = props;
+
+  const [isActive, setIsActive] = useState(false);
+
   return (
-    <div className={DepartStyle.box}>
+    <div
+      onClick={() => {
+        if (isActive == true) {
+          setIsActive(false);
+        } else {
+          setIsActive(true);
+        }
+      }}
+      className={isActive === true ? DepartStyle.boxActive : DepartStyle.box}
+    >
       <div
         style={{
           display: "flex",
@@ -13,9 +31,22 @@ const Departement = () => {
           alignContent: "center",
         }}
       >
-        <Image src={CodeTyping} width={"74px"} height={"74px"} />
+        <div
+          style={{
+            width: "74px",
+            height: "74px",
+          }}
+        >
+          {image}
+        </div>
       </div>
-      <div className={DepartStyle.titleContainer}>
+      <div
+        className={
+          isActive === true
+            ? DepartStyle.titleContainerActive
+            : DepartStyle.titleContainer
+        }
+      >
         <p
           style={{
             lineHeight: "15px",
@@ -24,7 +55,7 @@ const Departement = () => {
             fontSize: "14px",
           }}
         >
-          Rekayasa Perangkat Lunak
+          {title || "Title"}
         </p>
         <p
           style={{

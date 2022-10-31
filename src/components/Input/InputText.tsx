@@ -1,9 +1,6 @@
 import { Input } from "antd";
 import React, { ChangeEventHandler, CSSProperties, ReactNode } from "react";
 import Text from "../Typography/Text";
-import Icon from "@ant-design/icons/lib/components/Icon";
-import EmailIcon from "../../public/image/icons/Email.png";
-import Image, { StaticImageData } from "next/image";
 
 interface InputProps {
   label?: boolean;
@@ -27,12 +24,15 @@ const InputText = (props: InputProps) => {
             htmlFor="email"
             style={{
               display: "flex",
+              alignItems: "center",
               marginBottom: "8px",
               gap: "8px",
             }}
           >
             {icons ? icons : ""}
-            {<Text>{labelText}</Text> || <Text>Label</Text>}
+            {<Text style={{ lineHeight: "1px" }}>{labelText}</Text> || (
+              <Text>Label</Text>
+            )}
           </label>
         </div>
       ) : (

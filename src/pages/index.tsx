@@ -1,3 +1,3 @@
-import Main from "../views/Main/Main";
+import Main from "../views/Dashboard/Dashboard";
 
 export default Main;
