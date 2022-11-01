@@ -1,11 +1,15 @@
-import React from "react";
-import { Layout } from "antd";
+import React, { ReactNode } from "react";
 import Image from "next/image";
 import DashboardHead from "../../../../public/image/icons/DashboardHead.png";
 import Text from "../../../../components/Typography/Text";
 
-const TitleHead = () => {
-  const { Header } = Layout;
+interface HeaderProps {
+  title?: string;
+  icon?: ReactNode;
+}
+
+const TitleHead = (props: HeaderProps) => {
+  const { title, icon } = props;
   return (
     <>
       <div
@@ -22,7 +26,7 @@ const TitleHead = () => {
             height: "41px",
           }}
         >
-          <Image src={DashboardHead} />
+          {icon || <Image src={DashboardHead} />}
         </div>
         <Text
           size={25}
@@ -30,7 +34,7 @@ const TitleHead = () => {
             fontWeight: 800,
           }}
         >
-          Dashboard
+          {title || "Title"}
         </Text>
       </div>
       <hr

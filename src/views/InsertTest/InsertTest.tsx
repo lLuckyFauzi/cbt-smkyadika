@@ -1,8 +1,6 @@
 import React from "react";
 import Title from "./Partials/Title";
 import InsertStyle from "./Partials/Style.module.scss";
-import InputText from "../../components/Input/InputText";
-import Text from "../../components/Typography/Text";
 import InsertForm from "./Partials/InsertForm";
 
 const InsertTest = () => {

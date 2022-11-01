@@ -16,7 +16,7 @@ const InsertForm = () => {
       >
         <div
           style={{
-            width: "45%",
+            width: "55%",
           }}
         >
           <div
