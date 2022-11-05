@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode } from "react";
 import DepartStyle from "./Style.module.scss";
 
 interface ImageProps {
@@ -6,23 +6,18 @@ interface ImageProps {
   image?: ReactNode;
   onClick?: () => void;
   title: string;
+  departement?: string;
 }
 
 const Departement = (props: ImageProps) => {
-  const { image, onClick, title } = props;
-
-  const [isActive, setIsActive] = useState(false);
+  const { image, onClick, title, departement } = props;
 
   return (
     <div
-      onClick={() => {
-        if (isActive == true) {
-          setIsActive(false);
-        } else {
-          setIsActive(true);
-        }
-      }}
-      className={isActive === true ? DepartStyle.boxActive : DepartStyle.box}
+      onClick={onClick}
+      className={
+        departement === title ? DepartStyle.boxActive : DepartStyle.box
+      }
     >
       <div
         style={{
@@ -42,7 +37,7 @@ const Departement = (props: ImageProps) => {
       </div>
       <div
         className={
-          isActive === true
+          departement === title
             ? DepartStyle.titleContainerActive
             : DepartStyle.titleContainer
         }

@@ -1,27 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Departement from "./Partials/Departement";
 import Title from "./Partials/Title";
 import TableList from "./Partials/TableList";
 import Image from "next/image";
-import Accountancy from "../../public/image/currency.png";
-import Enginer from "../../public/image/CodeTyping.png";
-import Hotel from "../../public/image/hotel.jpg";
+
+import DepartementStatic from "../../static/data";
 
 const Dashboard = () => {
-  const data = [
-    {
-      title: "Akuntansi",
-      image: Accountancy,
-    },
-    {
-      title: "Rekayasa Perangkat Lunak",
-      image: Enginer,
-    },
-    {
-      title: "Perhotelan",
-      image: Hotel,
-    },
-  ];
+  const [departement, setDepartement] = useState("");
 
   return (
     <div
@@ -38,11 +24,18 @@ const Dashboard = () => {
             gap: "28px",
           }}
         >
-          {data.map((el) => {
+          {DepartementStatic.map((el) => {
             return (
               <Departement
-                image={<Image width={"100%"} height={"100%"} src={el.image} />}
-                title={el.title}
+                departement={departement}
+                onClick={() => {
+                  setDepartement(el.nama_jurusan);
+                }}
+                key={el.id}
+                image={
+                  <Image width={"100%"} height={"100%"} src={el.img_url} />
+                }
+                title={el.nama_jurusan}
               />
             );
           })}
