@@ -10,11 +10,27 @@ interface InputProps {
   value?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   icons?: ReactNode;
+  id?: string | undefined;
+  inputName?: string;
+  inputType?: "Password" | "Text";
+  onBlur?: ChangeEventHandler<HTMLInputElement>;
 }
 
 const InputText = (props: InputProps) => {
-  const { label, labelText, placeholder, style, value, onChange, icons } =
-    props;
+  const {
+    label,
+    labelText,
+    placeholder,
+    style,
+    value,
+    onChange,
+    icons,
+    id,
+    inputName,
+    inputType,
+    onBlur,
+    ...otherProps
+  } = props;
 
   return (
     <div>
@@ -38,12 +54,27 @@ const InputText = (props: InputProps) => {
       ) : (
         ""
       )}
-      <Input
-        style={style}
-        placeholder={placeholder || "Placeholder"}
-        value={value}
-        onChange={onChange}
-      />
+      {inputType === "Password" ? (
+        <Input.Password
+          id={id}
+          name={inputName}
+          onBlur={onBlur}
+          style={style}
+          placeholder={placeholder || "Placeholder"}
+          value={value}
+          onChange={onChange}
+        />
+      ) : (
+        <Input
+          id={id}
+          name={inputName}
+          onBlur={onBlur}
+          style={style}
+          placeholder={placeholder || "Placeholder"}
+          value={value}
+          onChange={onChange}
+        />
+      )}
     </div>
   );
 };

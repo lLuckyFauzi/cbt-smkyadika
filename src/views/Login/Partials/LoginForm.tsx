@@ -6,6 +6,9 @@ import LoginFormStyle from "./Style.module.scss";
 import EmailIcon from "../../../public/image/icons/Email.png";
 import PassIcon from "../../../public/image/icons/Password.png";
 import Image from "next/image";
+import { Form, Formik } from "formik";
+import LoginSchema from "../../../validations/VLogin";
+import ErrorLine from "../../../components/ErrorLine/ErrorLine";
 
 const LoginForm = () => {
   return (
@@ -69,65 +72,102 @@ const LoginForm = () => {
           <Text size={20} style={{ fontWeight: 200, color: "#023E7D" }}>
             Please enter your detail.
           </Text>
-          <form
-            style={{
-              marginTop: "45px",
-              width: "425px",
+          <Formik
+            validationSchema={LoginSchema}
+            initialValues={{ email: "", password: "" }}
+            onSubmit={(values) => {
+              console.log(values);
             }}
           >
-            <Text size={20} style={{ fontWeight: 700 }}>
-              LOGIN
-            </Text>
-            <div
-              style={{
-                marginTop: "20px",
-              }}
-            >
-              <InputText
-                icons={<Image src={EmailIcon} width={"28px"} height={"28px"} />}
-                label
-                labelText={"Email"}
-                placeholder={"Enter Your Email"}
-                style={{
-                  height: "52px",
-                  borderRadius: "12px",
-                }}
-              />
-            </div>
-            <div
-              style={{
-                marginTop: "20px",
-              }}
-            >
-              <InputText
-                icons={<Image src={PassIcon} width={"28px"} height={"28px"} />}
-                label
-                labelText={"Password"}
-                placeholder={"Enter Your Password"}
-                style={{
-                  height: "52px",
-                  borderRadius: "12px",
-                }}
-              />
-            </div>
-            <div
-              style={{
-                marginTop: "65px",
-              }}
-            >
-              <BtnPrimary>
-                <Text
-                  size={20}
-                  color="white"
+            {(formikHelpers) => {
+              const {
+                handleSubmit,
+                handleChange,
+                values,
+                errors,
+                handleBlur,
+                touched,
+              } = formikHelpers;
+              return (
+                <Form
+                  onSubmit={handleSubmit}
                   style={{
-                    fontWeight: "700",
+                    marginTop: "45px",
+                    width: "425px",
                   }}
                 >
-                  Login
-                </Text>
-              </BtnPrimary>
-            </div>
-          </form>
+                  <Text size={20} style={{ fontWeight: 700 }}>
+                    LOGIN
+                  </Text>
+                  <div
+                    style={{
+                      marginTop: "20px",
+                    }}
+                  >
+                    <InputText
+                      icons={
+                        <Image src={EmailIcon} width={"28px"} height={"28px"} />
+                      }
+                      label
+                      id="email"
+                      inputName="email"
+                      labelText={"Email"}
+                      placeholder={"Enter Your Email"}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.email}
+                      style={{
+                        height: "52px",
+                        borderRadius: "12px",
+                      }}
+                    />
+                    <ErrorLine name={touched.email && errors.email} />
+                  </div>
+                  <div
+                    style={{
+                      marginTop: "20px",
+                    }}
+                  >
+                    <InputText
+                      icons={
+                        <Image src={PassIcon} width={"28px"} height={"28px"} />
+                      }
+                      label
+                      id="password"
+                      inputName="password"
+                      labelText={"Password"}
+                      placeholder={"Enter Your Password"}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.password}
+                      style={{
+                        height: "52px",
+                        borderRadius: "12px",
+                      }}
+                    />
+                    <ErrorLine name={touched.password && errors.password} />
+                  </div>
+                  <div
+                    style={{
+                      marginTop: "65px",
+                    }}
+                  >
+                    <BtnPrimary type="submit">
+                      <Text
+                        size={20}
+                        color="white"
+                        style={{
+                          fontWeight: "700",
+                        }}
+                      >
+                        Login
+                      </Text>
+                    </BtnPrimary>
+                  </div>
+                </Form>
+              );
+            }}
+          </Formik>
         </div>
       </div>
       <div

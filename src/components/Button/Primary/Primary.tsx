@@ -11,19 +11,24 @@ interface ButtonProps {
   style?: CSSProperties;
   icon?: ReactNode;
   href?: string;
+  type?: "button" | "submit" | "reset" | undefined;
 }
 
 const BtnPrimary = (props: ButtonProps) => {
-  const { className, onClick, disabled, children, style, icon, href } = props;
+  const { className, onClick, disabled, children, style, icon, href, type } =
+    props;
 
   return (
     <div className={className || Styling.primary}>
-      <Link href={href || "#"}>
-        <Button style={style} type="link" onClick={onClick} disabled={disabled}>
-          {icon}
-          {children || "Button"}
-        </Button>
-      </Link>
+      <Button
+        style={style}
+        htmlType={type}
+        onClick={onClick}
+        disabled={disabled}
+      >
+        {icon}
+        {children || "Button"}
+      </Button>
     </div>
   );
 };
