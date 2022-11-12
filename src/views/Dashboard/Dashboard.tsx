@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Departement from "./Partials/Departement";
 import Title from "./Partials/Title";
 import TableList from "./Partials/TableList";
 import Image from "next/image";
-
 import DepartementStatic from "../../static/data";
+import MaterialData from "../../data/useMaterial";
 
 const Dashboard = () => {
   const [departement, setDepartement] = useState("");
+  const material = MaterialData("mapel");
+  console.log(material?.data?.data);
 
   return (
     <div

@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { Popconfirm, Table } from "antd";
 import { ColumnsType } from "antd/lib/table";
 import Text from "../../../components/Typography/Text";
@@ -12,6 +12,7 @@ import TrashIcon from "../../../public/image/icons/Trash.png";
 
 const TableData = () => {
   const { Option } = Select;
+
   interface DataType {
     key: React.Key;
     namaMapel: string;
