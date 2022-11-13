@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import BtnPrimary from "../../../components/Button/Primary/Primary";
 import InputText from "../../../components/Input/InputText";
 import Text from "../../../components/Typography/Text";
@@ -9,8 +9,27 @@ import Image from "next/image";
 import { Form, Formik } from "formik";
 import LoginSchema from "../../../validations/VLogin";
 import ErrorLine from "../../../components/ErrorLine/ErrorLine";
+import { useMutation } from "react-query";
+import { notification } from "antd";
+import SubmitLogin from "../../../mutations/useSubmitLogin";
+import { PublicContext } from "../../../layout/core";
 
 const LoginForm = () => {
+  const ctxPublic = useContext(PublicContext);
+
+  const loginMutation = useMutation(SubmitLogin, {
+    onSuccess: (values) => {
+      const token = values?.data.token;
+      localStorage.setItem("tokenpublic", token);
+      ctxPublic.setIsLogin(true);
+      notification.success({
+        message: "Login berhasil!",
+      });
+    },
+    // onError,
+    // onMutate
+  });
+
   return (
     <div className={LoginFormStyle.form}>
       <div
@@ -76,18 +95,14 @@ const LoginForm = () => {
             validationSchema={LoginSchema}
             initialValues={{ email: "", password: "" }}
             onSubmit={(values) => {
-              console.log(values);
+              loginMutation.mutate({
+                email: values.email,
+                password: values.password,
+              });
             }}
           >
             {(formikHelpers) => {
-              const {
-                handleSubmit,
-                handleChange,
-                values,
-                errors,
-                handleBlur,
-                touched,
-              } = formikHelpers;
+              const { handleSubmit, errors, touched } = formikHelpers;
               return (
                 <Form
                   onSubmit={handleSubmit}
@@ -108,14 +123,10 @@ const LoginForm = () => {
                       icons={
                         <Image src={EmailIcon} width={"28px"} height={"28px"} />
                       }
-                      label
-                      id="email"
-                      inputName="email"
-                      labelText={"Email"}
+                      label="Email"
                       placeholder={"Enter Your Email"}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.email}
+                      name="email"
+                      type="text"
                       style={{
                         height: "52px",
                         borderRadius: "12px",
@@ -132,14 +143,10 @@ const LoginForm = () => {
                       icons={
                         <Image src={PassIcon} width={"28px"} height={"28px"} />
                       }
-                      label
-                      id="password"
-                      inputName="password"
-                      labelText={"Password"}
                       placeholder={"Enter Your Password"}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.password}
+                      label="Password"
+                      name="password"
+                      type="password"
                       style={{
                         height: "52px",
                         borderRadius: "12px",

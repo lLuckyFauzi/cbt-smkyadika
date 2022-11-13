@@ -9,7 +9,6 @@ import MaterialData from "../../data/useMaterial";
 const Dashboard = () => {
   const [departement, setDepartement] = useState("");
   const material = MaterialData("mapel");
-  console.log(material?.data?.data);
 
   return (
     <div

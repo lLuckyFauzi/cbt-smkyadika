@@ -9,6 +9,7 @@ import { Select } from "antd";
 import AddIcon from "../../../public/image/icons/Add.png";
 import Image from "next/image";
 import TrashIcon from "../../../public/image/icons/Trash.png";
+import Link from "next/link";
 
 const TableData = () => {
   const { Option } = Select;
@@ -133,15 +134,16 @@ const TableData = () => {
           top: "20px",
         }}
       >
-        <BtnPrimary
-          href="/insert"
-          icon={<Image src={AddIcon} width={"20px"} height={"20px"} />}
-          style={{
-            padding: "8px 32px",
-          }}
-        >
-          Tambah
-        </BtnPrimary>
+        <Link href={"/insert"}>
+          <BtnPrimary
+            icon={<Image src={AddIcon} width={"20px"} height={"20px"} />}
+            style={{
+              padding: "8px 32px",
+            }}
+          >
+            Tambah
+          </BtnPrimary>
+        </Link>
       </div>
       <SelectCompo>
         <Option>Jake</Option>

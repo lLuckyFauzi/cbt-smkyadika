@@ -1,80 +1,40 @@
 import { Input } from "antd";
-import React, { ChangeEventHandler, CSSProperties, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import Text from "../Typography/Text";
+import { InputProps } from "antd/lib/input";
+import { useField } from "formik";
 
-interface InputProps {
-  label?: boolean;
-  labelText?: string;
-  placeholder?: string;
-  style?: CSSProperties;
-  value?: string;
-  onChange?: ChangeEventHandler<HTMLInputElement>;
+interface FieldProps extends InputProps {
+  title?: string;
+  label?: string;
   icons?: ReactNode;
-  id?: string | undefined;
   inputName?: string;
   inputType?: "Password" | "Text";
-  onBlur?: ChangeEventHandler<HTMLInputElement>;
 }
 
-const InputText = (props: InputProps) => {
-  const {
-    label,
-    labelText,
-    placeholder,
-    style,
-    value,
-    onChange,
-    icons,
-    id,
-    inputName,
-    inputType,
-    onBlur,
-    ...otherProps
-  } = props;
+const InputText = (props: FieldProps) => {
+  const { label, placeholder, style, icons, inputType, ...otherProps } = props;
+  const [field] = useField(otherProps as any);
 
   return (
     <div>
-      {label ? (
-        <div>
-          <label
-            htmlFor="email"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              marginBottom: "8px",
-              gap: "8px",
-            }}
-          >
-            {icons ? icons : ""}
-            {<Text style={{ lineHeight: "1px" }}>{labelText}</Text> || (
-              <Text>Label</Text>
-            )}
-          </label>
-        </div>
-      ) : (
-        ""
-      )}
-      {inputType === "Password" ? (
-        <Input.Password
-          id={id}
-          name={inputName}
-          onBlur={onBlur}
-          style={style}
-          placeholder={placeholder || "Placeholder"}
-          value={value}
-          onChange={onChange}
-        />
-      ) : (
-        <Input
-          id={id}
-          name={inputName}
-          onBlur={onBlur}
-          style={style}
-          placeholder={placeholder || "Placeholder"}
-          value={value}
-          onChange={onChange}
-        />
-      )}
+      <div>
+        <label
+          htmlFor="email"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            marginBottom: "8px",
+            gap: "8px",
+          }}
+        >
+          {icons ? icons : ""}
+          {<Text style={{ lineHeight: "1px" }}>{label}</Text> || (
+            <Text>Label</Text>
+          )}
+        </label>
+      </div>
+      <Input {...field} {...props} />
     </div>
   );
 };

@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import Logout from "../../../../public/image/icons/Logout.png";
 import Image from "next/image";
-import { Popconfirm } from "antd";
+import { notification, Popconfirm } from "antd";
 import Text from "../../../../components/Typography/Text";
+import { useRouter } from "next/router";
+import { PublicContext } from "../../../core";
 
 const FooterSider = () => {
+  const router = useRouter();
+  const ctxPublic = useContext(PublicContext);
   return (
     <div
       style={{
@@ -26,7 +30,14 @@ const FooterSider = () => {
         <Popconfirm
           placement="topLeft"
           title="Logout?"
-          onConfirm={() => {}}
+          onConfirm={() => {
+            ctxPublic.setIsLogin(false);
+            localStorage.removeItem("tokenpublic");
+            router.replace("/login");
+            notification.success({
+              message: "Logout berhasil!",
+            });
+          }}
           okText="Yes"
           cancelText="No"
         >
