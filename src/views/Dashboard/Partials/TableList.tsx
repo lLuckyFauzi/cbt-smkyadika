@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect, useState } from "react";
-import { Popconfirm, Table } from "antd";
+import { Popconfirm, Spin, Table } from "antd";
 import { ColumnsType } from "antd/lib/table";
 import Text from "../../../components/Typography/Text";
 import BtnPrimary from "../../../components/Button/Primary/Primary";
@@ -10,31 +10,54 @@ import AddIcon from "../../../public/image/icons/Add.png";
 import Image from "next/image";
 import TrashIcon from "../../../public/image/icons/Trash.png";
 import Link from "next/link";
+import EmbedData from "../../../data/useEmbedLink";
+import { EmbedLink } from "../../../models/EmbedLinkModels";
+import Moment from "moment";
 
-const TableData = () => {
+interface TableListProps {
+  departement?: string;
+}
+
+function fileringData(departement: string | undefined) {
+  const EmbedLink = EmbedData("embed-link");
+  const material = EmbedLink.data?.filter((data) => {
+    return data.jurusan.jurusan === departement;
+  });
+
+  return material;
+}
+
+const TableData = (props: TableListProps) => {
+  const { departement } = props;
   const { Option } = Select;
+  const embedLinkData = fileringData(departement);
 
   interface DataType {
-    key: React.Key;
+    key: string;
     namaMapel: string;
-    tingkat: number;
     namaGuru: string;
+    tingkat: string;
+    jurusan: string;
     tanggal: string;
     action: ReactNode;
   }
 
-  const columns: ColumnsType<DataType> = [
+  const columns = [
     {
       title: "Nama Mapel",
       dataIndex: "namaMapel",
+    },
+    {
+      title: "Nama Guru",
+      dataIndex: "namaGuru",
     },
     {
       title: "Tingkat",
       dataIndex: "tingkat",
     },
     {
-      title: "Nama Guru",
-      dataIndex: "namaGuru",
+      title: "Jurusan",
+      dataIndex: "jurusan",
     },
     {
       title: "Tanggal Pelaksanaan",
@@ -46,13 +69,14 @@ const TableData = () => {
     },
   ];
 
-  const data: DataType[] = [
-    {
-      key: "1",
-      namaMapel: "PKN",
-      tingkat: 12,
-      namaGuru: "Bu Desty",
-      tanggal: "22 October 2022",
+  const data: DataType[] | undefined = embedLinkData?.map((el: EmbedLink) => {
+    return {
+      key: el._id,
+      namaMapel: el.mapel.namaMapel,
+      namaGuru: el.guruMapel.nama,
+      tingkat: el.tingkatan.tingkatan,
+      jurusan: el.jurusan.jurusan,
+      tanggal: Moment(el.createdAt).format("LL"),
       action: (
         <Popconfirm
           placement="topLeft"
@@ -68,52 +92,8 @@ const TableData = () => {
           />
         </Popconfirm>
       ),
-    },
-    {
-      key: "2",
-      namaMapel: "Bahasa Inggris",
-      tingkat: 12,
-      namaGuru: "Ms Fitri",
-      tanggal: "22 October 2022",
-      action: (
-        <Popconfirm
-          placement="topLeft"
-          title="Are you sure?"
-          onConfirm={() => {}}
-          onCancel={() => {}}
-        >
-          <Image
-            style={{ cursor: "pointer" }}
-            src={TrashIcon}
-            width={"26px"}
-            height={"26px"}
-          />
-        </Popconfirm>
-      ),
-    },
-    {
-      key: "3",
-      namaMapel: "Basis Data",
-      tingkat: 11,
-      namaGuru: "Pak Yoga",
-      tanggal: "22 October 2022",
-      action: (
-        <Popconfirm
-          placement="topLeft"
-          title="Are you sure?"
-          onConfirm={() => {}}
-          onCancel={() => {}}
-        >
-          <Image
-            style={{ cursor: "pointer" }}
-            src={TrashIcon}
-            width={"26px"}
-            height={"26px"}
-          />
-        </Popconfirm>
-      ),
-    },
-  ];
+    };
+  });
 
   return (
     <div className={TableStyle.tableContainer}>
@@ -148,15 +128,17 @@ const TableData = () => {
       <SelectCompo>
         <Option>Jake</Option>
       </SelectCompo>
-      <Table
-        className={TableStyle.table}
-        style={{
-          fontFamily: "Karla",
-        }}
-        columns={columns}
-        dataSource={data}
-        size="middle"
-      />
+      <Spin spinning={false} tip="Loading...">
+        <Table
+          className={TableStyle.table}
+          style={{
+            fontFamily: "Karla",
+          }}
+          columns={columns}
+          dataSource={data}
+          size="middle"
+        />
+      </Spin>
     </div>
   );
 };

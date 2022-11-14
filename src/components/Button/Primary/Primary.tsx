@@ -1,5 +1,4 @@
 import { Button } from "antd";
-import Link from "next/link";
 import React, { CSSProperties, ReactNode } from "react";
 import Styling from "../ButtonStyle.module.scss";
 

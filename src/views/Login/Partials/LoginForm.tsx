@@ -25,9 +25,12 @@ const LoginForm = () => {
       notification.success({
         message: "Login berhasil!",
       });
+      ctxPublic.setIsLoading(false);
     },
     // onError,
-    // onMutate
+    onMutate: () => {
+      ctxPublic.setIsLoading(true);
+    },
   });
 
   return (

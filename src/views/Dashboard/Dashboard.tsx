@@ -4,11 +4,9 @@ import Title from "./Partials/Title";
 import TableList from "./Partials/TableList";
 import Image from "next/image";
 import DepartementStatic from "../../static/data";
-import MaterialData from "../../data/useMaterial";
 
 const Dashboard = () => {
   const [departement, setDepartement] = useState("");
-  const material = MaterialData("mapel");
 
   return (
     <div
@@ -59,7 +57,7 @@ const Dashboard = () => {
           />
         </div>
       </div>
-      <TableList />
+      <TableList departement={departement} />
     </div>
   );
 };

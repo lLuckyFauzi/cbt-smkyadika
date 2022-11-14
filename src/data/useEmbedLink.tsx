@@ -1,22 +1,18 @@
-import { useQuery } from "react-query";
 import Axios, { AxiosError } from "axios";
+import { useQuery } from "react-query";
 import { LOCAL_API } from "../constant";
+import { EmbedLink } from "../models/EmbedLinkModels";
 
-interface ModelMaterial {
-  _id: string;
-  namaMapel: string;
-}
-
-type useMaterial = {
-  data: ModelMaterial[];
+type useEmbed = {
+  data: EmbedLink[];
 };
 
-type TQueryFnData = useMaterial;
+type TQueryFnData = useEmbed;
 type TError = AxiosError;
 
-function useMaterial(key: string) {
+function useEmbedLink(key: string) {
   const query = useQuery<TQueryFnData, TError>(key, async () => {
-    const axios = await Axios.get(`${LOCAL_API}mapel`, {
+    const axios = await Axios.get(`${LOCAL_API}embed/link`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -29,8 +25,8 @@ function useMaterial(key: string) {
 
   return {
     ...query,
-    data: query?.data,
+    data: query?.data?.data,
   };
 }
 
-export default useMaterial;
+export default useEmbedLink;

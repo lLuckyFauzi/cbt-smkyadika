@@ -25,7 +25,7 @@ const SideHeader = () => {
             fontWeight: 500,
           }}
         >
-          Vanilla
+          CBT
         </Text>
         <Text
           size={20}
@@ -35,8 +35,19 @@ const SideHeader = () => {
           }}
         >
           {" "}
-          CBT
+          SMK Yadika
         </Text>
+        <Text
+          size={20}
+          style={{
+            color: "white",
+            fontWeight: 800,
+          }}
+        >
+          {" "}
+          Soreang
+        </Text>
+        <br />
         <Text
           size={10}
           style={{

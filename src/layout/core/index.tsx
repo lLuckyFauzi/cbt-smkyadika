@@ -9,10 +9,18 @@ import JWT from "jwt-decode";
 interface GlobalContext {
   isLogin: boolean;
   setIsLogin: (value: boolean) => void;
+  isLoading: boolean;
+  setIsLoading: (value: boolean) => void;
+  isToken: string;
+  setIsToken: (value: string) => void;
 }
 export const PublicContext = React.createContext<GlobalContext>({
   isLogin: false,
   setIsLogin: (_value: boolean) => {},
+  setIsLoading: (_value: boolean) => {},
+  isLoading: false,
+  isToken: "",
+  setIsToken: (_value: string) => {},
 });
 
 function ErrorCheck() {
@@ -22,7 +30,7 @@ function ErrorCheck() {
   useEffect(() => {
     const token = localStorage.getItem("tokenpublic");
     if (publicCtx.isLogin === true) {
-      router.replace("/");
+      router.replace("/dashboard");
     }
     if (!token) {
       router.push("/login");
@@ -35,9 +43,20 @@ function ErrorCheck() {
 const LayoutDefault = (props: AppProps) => {
   const { Component, pageProps } = props;
   const [isLogin, setIsLogin] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isToken, setIsToken] = useState<string>("");
   const router = useRouter();
   return (
-    <PublicContext.Provider value={{ isLogin, setIsLogin }}>
+    <PublicContext.Provider
+      value={{
+        isLogin,
+        setIsLogin,
+        setIsLoading,
+        isLoading,
+        isToken,
+        setIsToken,
+      }}
+    >
       <ErrorCheck />
       <Layout
         style={{

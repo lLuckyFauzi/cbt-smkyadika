@@ -2,21 +2,21 @@ import { useQuery } from "react-query";
 import Axios, { AxiosError } from "axios";
 import { LOCAL_API } from "../constant";
 
-interface ModelMaterial {
+interface ModelLevel {
   _id: string;
-  namaMapel: string;
+  tingkatan: string;
 }
 
-type useMaterial = {
-  data: ModelMaterial[];
+type useDataLevel = {
+  data: ModelLevel[];
 };
 
-type TQueryFnData = useMaterial;
+type TQueryFnData = useDataLevel;
 type TError = AxiosError;
 
-function useMaterial(key: string) {
+function useLevel(key: string) {
   const query = useQuery<TQueryFnData, TError>(key, async () => {
-    const axios = await Axios.get(`${LOCAL_API}mapel`, {
+    const axios = await Axios.get(`${LOCAL_API}tingkatan`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -33,4 +33,4 @@ function useMaterial(key: string) {
   };
 }
 
-export default useMaterial;
+export default useLevel;
