@@ -29,7 +29,7 @@ const Sider = () => {
           }}
         >
           <SideHeader />
-          <MenuSider />
+          <MenuSider key={"Dashboard"} />
           <FooterSider />
         </div>
       </Sider>

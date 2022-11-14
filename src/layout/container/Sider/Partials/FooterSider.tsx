@@ -54,7 +54,7 @@ const FooterSider = () => {
               fontWeight: 800,
             }}
           >
-            Lucky Fauzi
+            {ctxPublic.userData?.nama}
           </Text>
         </div>
         <div>
@@ -66,7 +66,7 @@ const FooterSider = () => {
               fontWeight: 400,
             }}
           >
-            luckyfauzi2004@gmail.com
+            {ctxPublic.userData?.username}
           </Text>
         </div>
       </div>

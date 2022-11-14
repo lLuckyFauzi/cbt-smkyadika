@@ -1,6 +1,5 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useContext, useEffect, useState } from "react";
 import { Popconfirm, Spin, Table } from "antd";
-import { ColumnsType } from "antd/lib/table";
 import Text from "../../../components/Typography/Text";
 import BtnPrimary from "../../../components/Button/Primary/Primary";
 import TableStyle from "./Style.module.scss";
@@ -11,8 +10,9 @@ import Image from "next/image";
 import TrashIcon from "../../../public/image/icons/Trash.png";
 import Link from "next/link";
 import EmbedData from "../../../data/useEmbedLink";
-import { EmbedLink } from "../../../models/EmbedLinkModels";
+import { EmbedLinkGet } from "../../../models/EmbedLinkModels";
 import Moment from "moment";
+import { PublicContext } from "../../../layout/core";
 
 interface TableListProps {
   departement?: string;
@@ -21,7 +21,8 @@ interface TableListProps {
 function fileringData(departement: string | undefined) {
   const EmbedLink = EmbedData("embed-link");
   const material = EmbedLink.data?.filter((data) => {
-    return data.jurusan.jurusan === departement;
+    const departementFilter = data.jurusan.jurusan === departement;
+    return departementFilter;
   });
 
   return material;
@@ -31,6 +32,11 @@ const TableData = (props: TableListProps) => {
   const { departement } = props;
   const { Option } = Select;
   const embedLinkData = fileringData(departement);
+  const ctxPublic = useContext(PublicContext);
+
+  useEffect(() => {
+    ctxPublic.setTotalMaterial(embedLinkData?.length);
+  }, [departement]);
 
   interface DataType {
     key: string;
@@ -69,35 +75,41 @@ const TableData = (props: TableListProps) => {
     },
   ];
 
-  const data: DataType[] | undefined = embedLinkData?.map((el: EmbedLink) => {
-    return {
-      key: el._id,
-      namaMapel: el.mapel.namaMapel,
-      namaGuru: el.guruMapel.nama,
-      tingkat: el.tingkatan.tingkatan,
-      jurusan: el.jurusan.jurusan,
-      tanggal: Moment(el.createdAt).format("LL"),
-      action: (
-        <Popconfirm
-          placement="topLeft"
-          title="Are you sure?"
-          onConfirm={() => {}}
-          onCancel={() => {}}
-        >
-          <Image
-            style={{ cursor: "pointer" }}
-            src={TrashIcon}
-            width={"26px"}
-            height={"26px"}
-          />
-        </Popconfirm>
-      ),
-    };
-  });
+  const data: DataType[] | undefined = embedLinkData?.map(
+    (el: EmbedLinkGet) => {
+      return {
+        key: el._id,
+        namaMapel: el.mapel.namaMapel,
+        namaGuru: el.guruMapel.nama,
+        tingkat: el.tingkatan.tingkatan,
+        jurusan: el.jurusan.jurusan,
+        tanggal: Moment(el.createdAt).format("LL"),
+        action: (
+          <Popconfirm
+            placement="topLeft"
+            title="Are you sure?"
+            onConfirm={() => {}}
+            onCancel={() => {}}
+          >
+            <Image
+              style={{ cursor: "pointer" }}
+              src={TrashIcon}
+              width={"26px"}
+              height={"26px"}
+            />
+          </Popconfirm>
+        ),
+      };
+    }
+  );
 
   return (
     <div className={TableStyle.tableContainer}>
-      <div>
+      <div
+        style={{
+          marginBottom: "15px",
+        }}
+      >
         <Text
           size={25}
           style={{
@@ -125,9 +137,9 @@ const TableData = (props: TableListProps) => {
           </BtnPrimary>
         </Link>
       </div>
-      <SelectCompo>
+      {/* <SelectCompo defaultValue="Jake" placeholder="Hello">
         <Option>Jake</Option>
-      </SelectCompo>
+      </SelectCompo> */}
       <Spin spinning={false} tip="Loading...">
         <Table
           className={TableStyle.table}

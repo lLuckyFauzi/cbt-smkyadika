@@ -17,8 +17,7 @@ interface SelectProps {
 const SelectCompo = (props: SelectProps) => {
   const { children, defaultValue, style, placeholder, values, onChange } =
     props;
-  console.log(values);
-
+  const { Option } = Select;
   return (
     <div
       className={SelectStyle.select}
@@ -34,7 +33,7 @@ const SelectCompo = (props: SelectProps) => {
         value={values}
         onChange={onChange}
       >
-        {children}
+        {children || <Option>Hello</Option>}
       </Select>
     </div>
   );

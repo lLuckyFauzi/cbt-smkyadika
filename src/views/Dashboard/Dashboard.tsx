@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Departement from "./Partials/Departement";
 import Title from "./Partials/Title";
 import TableList from "./Partials/TableList";
 import Image from "next/image";
 import DepartementStatic from "../../static/data";
+import { PublicContext } from "../../layout/core";
 
 const Dashboard = () => {
   const [departement, setDepartement] = useState("");
+  const ctxPublic = useContext(PublicContext);
+  console.log(ctxPublic.userData);
 
   return (
     <div

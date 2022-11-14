@@ -1,7 +1,7 @@
 import * as yup from 'yup'
 
 const validationSchema = yup.object().shape({
-    email: yup.string().required('Email tidak boleh kosong'),
+    username: yup.string().required('Username tidak boleh kosong'),
     password: yup.string().required("Password tidak boleh kosong")
 })
 

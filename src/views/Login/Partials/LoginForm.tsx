@@ -3,7 +3,7 @@ import BtnPrimary from "../../../components/Button/Primary/Primary";
 import InputText from "../../../components/Input/InputText";
 import Text from "../../../components/Typography/Text";
 import LoginFormStyle from "./Style.module.scss";
-import EmailIcon from "../../../public/image/icons/Email.png";
+import UserIcon from "../../../public/image/icons/user.png";
 import PassIcon from "../../../public/image/icons/Password.png";
 import Image from "next/image";
 import { Form, Formik } from "formik";
@@ -13,12 +13,17 @@ import { useMutation } from "react-query";
 import { notification } from "antd";
 import SubmitLogin from "../../../mutations/useSubmitLogin";
 import { PublicContext } from "../../../layout/core";
+import { AxiosError } from "axios";
+
+interface Error {
+  message: string;
+}
 
 const LoginForm = () => {
   const ctxPublic = useContext(PublicContext);
 
   const loginMutation = useMutation(SubmitLogin, {
-    onSuccess: (values) => {
+    onSuccess: async (values) => {
       const token = values?.data.token;
       localStorage.setItem("tokenpublic", token);
       ctxPublic.setIsLogin(true);
@@ -27,8 +32,25 @@ const LoginForm = () => {
       });
       ctxPublic.setIsLoading(false);
     },
-    // onError,
-    onMutate: () => {
+    onError: async (err: AxiosError<Error>) => {
+      const error = err.response?.data.message;
+      if (err.response?.status === 404) {
+        ctxPublic.setIsLoading(false);
+        return notification.error({
+          message: "User tidak ditemukan!",
+        });
+      } else if (err.response?.status === 401) {
+        ctxPublic.setIsLoading(false);
+        return notification.error({
+          message: "Password salah!",
+        });
+      }
+      notification.error({
+        message: error,
+      });
+      ctxPublic.setIsLoading(false);
+    },
+    onMutate: async () => {
       ctxPublic.setIsLoading(true);
     },
   });
@@ -96,10 +118,10 @@ const LoginForm = () => {
           </Text>
           <Formik
             validationSchema={LoginSchema}
-            initialValues={{ email: "", password: "" }}
+            initialValues={{ username: "", password: "" }}
             onSubmit={(values) => {
               loginMutation.mutate({
-                email: values.email,
+                username: values.username,
                 password: values.password,
               });
             }}
@@ -124,18 +146,18 @@ const LoginForm = () => {
                   >
                     <InputText
                       icons={
-                        <Image src={EmailIcon} width={"28px"} height={"28px"} />
+                        <Image src={UserIcon} width={"28px"} height={"28px"} />
                       }
-                      label="Email"
-                      placeholder={"Enter Your Email"}
-                      name="email"
+                      placeholder={"Enter Your Username"}
+                      label="Username"
+                      name="username"
                       type="text"
                       style={{
                         height: "52px",
                         borderRadius: "12px",
                       }}
                     />
-                    <ErrorLine name={touched.email && errors.email} />
+                    <ErrorLine name={touched.username && errors.username} />
                   </div>
                   <div
                     style={{

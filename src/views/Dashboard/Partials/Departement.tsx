@@ -1,4 +1,5 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useContext } from "react";
+import { PublicContext } from "../../../layout/core";
 import DepartStyle from "./Style.module.scss";
 
 interface ImageProps {
@@ -11,6 +12,7 @@ interface ImageProps {
 
 const Departement = (props: ImageProps) => {
   const { image, onClick, title, departement } = props;
+  const ctxPublic = useContext(PublicContext);
 
   return (
     <div
@@ -60,7 +62,7 @@ const Departement = (props: ImageProps) => {
             fontSize: "10px",
           }}
         >
-          3 Mata Pelajaran
+          {departement === title && ctxPublic.totalMaterial + " Mata Pelajaran"}
         </p>
       </div>
     </div>

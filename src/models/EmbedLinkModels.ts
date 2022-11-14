@@ -18,7 +18,7 @@ export interface Jurusan {
     jurusan:string
 }
 
-export interface EmbedLink {
+export interface EmbedLinkGet {
     _id: string;
     mapel:Material
     embedLink: string;
@@ -27,4 +27,15 @@ export interface EmbedLink {
     jurusan: Jurusan
     createdAt:string;
     updatedAt:string
+}
+
+export interface EmbedLinkPost {
+        _id?: string;
+        mapel: string;
+        embedLink: string;
+        guruMapel: unknown;
+        tingkatan: string;
+        jurusan: string;
+        createdAt?:string;
+        updatedAt?:string
 }

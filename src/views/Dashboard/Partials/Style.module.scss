@@ -1,5 +1,5 @@
 .box {
-    border: 1px solid #B8AFAF;
+    border: 1px solid #b8afaf71;
     transition: 0.2s;
     width: 220px;
     cursor: pointer;
@@ -9,6 +9,7 @@
         color: rgb(0, 0, 0);
         font-family: "Karla";
         transition: 0.2s;
+        height: 50px;
     }
 }
 .box:hover {
@@ -16,9 +17,11 @@
     border: none;
     width: 220px;
     cursor: pointer;
+    
 }
 .box:hover .titleContainer {
     background-color: #0A85ED;
+    height: 53px;
     color: rgb(255, 255, 255);
 }
 
@@ -34,6 +37,7 @@
     padding: 7px 15px;
     background-color: #0A85ED;
     color: rgb(255, 255, 255);
+    
 }
 
 
