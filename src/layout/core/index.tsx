@@ -42,12 +42,8 @@ function ErrorCheck() {
   const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem("tokenpublic");
     if (publicCtx.isLogin === true) {
       router.replace("/dashboard");
-    }
-    if (!token) {
-      router.push("/login");
     }
   }, [publicCtx.isLogin]);
 
@@ -106,7 +102,7 @@ const LayoutDefault = (props: AppProps) => {
       }}
     >
       <ErrorCheck />
-      {/* <CheckToken /> */}
+      <CheckToken />
       <Layout
         style={{
           backgroundColor: "white",
