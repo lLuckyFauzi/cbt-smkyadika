@@ -53,9 +53,12 @@ function ErrorCheck() {
 function CheckToken() {
   const publicCtx = useContext(PublicContext);
   const router = useRouter();
-  useEffect(() => {
+
+  const addToken = () => {
     const token = localStorage?.getItem("tokenpublic");
-    if (!token) {
+    if (token) {
+      publicCtx.setIsToken(token);
+    } else {
       router.push("/login");
       return;
     }
@@ -67,6 +70,12 @@ function CheckToken() {
       publicCtx.setUserData(decode);
       publicCtx.setIdUser(decode.id);
     }
+
+    return token;
+  };
+
+  useEffect(() => {
+    addToken();
   }, [publicCtx.isToken]);
 
   return null;
@@ -74,6 +83,7 @@ function CheckToken() {
 
 const LayoutDefault = (props: AppProps) => {
   const { Component, pageProps } = props;
+  const router = useRouter();
   const [isLogin, setIsLogin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isToken, setIsToken] = useState<string>("");
@@ -81,7 +91,6 @@ const LayoutDefault = (props: AppProps) => {
   const [userData, setUserData] = useState<User>();
   const [totalMaterial, setTotalMaterial] = useState<number | undefined>(0);
 
-  const router = useRouter();
   return (
     <PublicContext.Provider
       value={{

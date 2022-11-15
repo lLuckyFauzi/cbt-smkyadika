@@ -1,10 +1,8 @@
-import React, { ReactNode, useContext, useEffect, useState } from "react";
-import { Popconfirm, Spin, Table } from "antd";
+import React, { ReactNode, useContext, useEffect } from "react";
+import { notification, Popconfirm, Spin, Table } from "antd";
 import Text from "../../../components/Typography/Text";
 import BtnPrimary from "../../../components/Button/Primary/Primary";
 import TableStyle from "./Style.module.scss";
-import SelectCompo from "../../../components/Select/SelectCompo";
-import { Select } from "antd";
 import AddIcon from "../../../public/image/icons/Add.png";
 import Image from "next/image";
 import TrashIcon from "../../../public/image/icons/Trash.png";
@@ -13,40 +11,59 @@ import EmbedData from "../../../data/useEmbedLink";
 import { EmbedLinkGet } from "../../../models/EmbedLinkModels";
 import Moment from "moment";
 import { PublicContext } from "../../../layout/core";
-
+import UseDeleteTable from "../../../mutations/useDeleteTable";
+import { useMutation, useQueryClient } from "react-query";
 interface TableListProps {
   departement?: string;
 }
-
-function fileringData(departement: string | undefined) {
-  const EmbedLink = EmbedData("embed-link");
-  const material = EmbedLink.data?.filter((data) => {
-    const departementFilter = data.jurusan.jurusan === departement;
-    return departementFilter;
-  });
-
-  return material;
+interface DataType {
+  key: string;
+  namaMapel: string;
+  namaGuru: string;
+  tingkat: string;
+  jurusan: string;
+  tanggal: string;
+  action: ReactNode;
 }
 
 const TableData = (props: TableListProps) => {
   const { departement } = props;
-  const { Option } = Select;
+  const EmbedLink = EmbedData("embed-link");
+
+  function fileringData(departement: string | undefined) {
+    const material = EmbedLink.data?.filter((data) => {
+      const departementFilter = data.jurusan.jurusan === departement;
+      return departementFilter;
+    });
+
+    return material;
+  }
+
   const embedLinkData = fileringData(departement);
   const ctxPublic = useContext(PublicContext);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     ctxPublic.setTotalMaterial(embedLinkData?.length);
   }, [departement]);
 
-  interface DataType {
-    key: string;
-    namaMapel: string;
-    namaGuru: string;
-    tingkat: string;
-    jurusan: string;
-    tanggal: string;
-    action: ReactNode;
-  }
+  const deleteTableMutation = useMutation(UseDeleteTable, {
+    onSuccess: (data) => {
+      console.log(data);
+      notification.success({
+        message: "Embed deleted",
+      });
+    },
+    onSettled: (data) => {
+      console.log(data);
+      if (data) {
+        queryClient.invalidateQueries("embed-link");
+      }
+    },
+    onError: (err) => {
+      console.log(err);
+    },
+  });
 
   const columns = [
     {
@@ -88,7 +105,12 @@ const TableData = (props: TableListProps) => {
           <Popconfirm
             placement="topLeft"
             title="Are you sure?"
-            onConfirm={() => {}}
+            onConfirm={() => {
+              deleteTableMutation.mutate({
+                _id: el._id,
+                token: ctxPublic?.isToken,
+              });
+            }}
             onCancel={() => {}}
           >
             <Image
