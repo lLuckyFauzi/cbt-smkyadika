@@ -31,14 +31,13 @@ const Home: NextPage = () => {
         <br />
         <Text
           size={20}
-          color="lightGray"
           style={{
             padding: "5px",
             backgroundColor: "white",
             borderRadius: "8px",
           }}
         >
-          Happy coding with Koky's Template! ;)
+          Happy coding with Koky's Template! ;
         </Text>
         <br />
         <div style={{ marginTop: "20px" }}>
