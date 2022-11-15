@@ -1,10 +1,10 @@
 import Axios, { AxiosError } from "axios";
 import { useQuery } from "react-query";
 import { LOCAL_API } from "../constant";
-import { EmbedLink } from "../models/EmbedLinkModels";
+import { EmbedLinkGet } from "../models/EmbedLinkModels";
 
 type useEmbed = {
-  data: EmbedLink[];
+  data: EmbedLinkGet[];
 };
 
 type TQueryFnData = useEmbed;
