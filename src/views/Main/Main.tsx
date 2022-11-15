@@ -37,7 +37,7 @@ const Home: NextPage = () => {
             borderRadius: "8px",
           }}
         >
-          Happy coding with Koky's Template! ;
+          Happy coding with Koky's Template!
         </Text>
         <br />
         <div style={{ marginTop: "20px" }}>

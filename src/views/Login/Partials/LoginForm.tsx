@@ -110,7 +110,7 @@ const LoginForm = () => {
           </Text>
           <br />
           <Text size={20} style={{ fontWeight: 200, color: "#023E7D" }}>
-            Hello Teacher, How's your day? hope it's good!
+            Hello Teacher, How yours day? hope its good!
           </Text>
           <br />
           <Text size={20} style={{ fontWeight: 200, color: "#023E7D" }}>
