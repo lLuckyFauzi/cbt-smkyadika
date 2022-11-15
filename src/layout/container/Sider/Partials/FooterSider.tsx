@@ -41,7 +41,7 @@ const FooterSider = () => {
           okText="Yes"
           cancelText="No"
         >
-          <Image src={Logout} />
+          <Image src={Logout} alt="img" />
         </Popconfirm>
       </div>
       <div>

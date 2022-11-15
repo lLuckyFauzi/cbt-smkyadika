@@ -56,13 +56,13 @@ function CheckToken() {
   useEffect(() => {
     const token = localStorage.getItem("tokenpublic");
     if (!token) {
+      router.push("/login");
       return;
     } else {
       publicCtx.setIsToken(token);
     }
 
     if (publicCtx.isToken === "" || undefined) {
-      router.push("/login");
       return;
     } else {
       const decode: User = JWT(publicCtx.isToken);

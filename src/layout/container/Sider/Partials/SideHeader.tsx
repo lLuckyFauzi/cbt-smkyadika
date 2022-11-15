@@ -11,7 +11,7 @@ const SideHeader = () => {
         marginTop: "35px",
       }}
     >
-      <Image src={Yadika} width={"56px"} height={"56px"} />
+      <Image src={Yadika} alt="img" width={"56px"} height={"56px"} />
       <div
         style={{
           textAlign: "center",

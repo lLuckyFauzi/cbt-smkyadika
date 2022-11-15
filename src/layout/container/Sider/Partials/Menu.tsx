@@ -16,7 +16,14 @@ const MenuSider = (props: MenuItemProps) => {
       <Menu>
         <Menu.Item
           key={key}
-          icon={<Image src={DashboardIcon} width={"18px"} height={"18px"} />}
+          icon={
+            <Image
+              src={DashboardIcon}
+              alt="img"
+              width={"18px"}
+              height={"18px"}
+            />
+          }
         >
           <Link href={"/dashboard"}>
             <Text color="white" size={15} style={{ fontWeight: "400" }}>

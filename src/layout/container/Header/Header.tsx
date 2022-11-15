@@ -24,9 +24,15 @@ const Header = (props: HeaderProps) => {
       }}
     >
       {router.pathname === "/insert" ? (
-        <TitleHead title="Add Material" icon={<Image src={Letter} />} />
+        <TitleHead
+          title="Add Material"
+          icon={<Image alt="img" src={Letter} />}
+        />
       ) : (
-        <TitleHead title="Dashboard" icon={<Image src={DashboardHead} />} />
+        <TitleHead
+          title="Dashboard"
+          icon={<Image alt="img" src={DashboardHead} />}
+        />
       )}
       {children}
     </Header>
