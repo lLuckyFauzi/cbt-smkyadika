@@ -145,7 +145,7 @@ const InsertForm = () => {
                       style={{
                         backgroundColor: "white",
                         height: "35px",
-                        width: "40%",
+                        width: "298px",
                         borderRadius: "8px",
                         border: "1px solid #b8afaf71",
                         outlineStyle: "none",
@@ -199,7 +199,7 @@ const InsertForm = () => {
                       style={{
                         backgroundColor: "white",
                         height: "35px",
-                        width: "40%",
+                        width: "298px",
                         borderRadius: "8px",
                         border: "1px solid #b8afaf71",
                         outlineStyle: "none",
@@ -233,7 +233,7 @@ const InsertForm = () => {
                       style={{
                         backgroundColor: "white",
                         height: "35px",
-                        width: "40%",
+                        width: "298px",
                         borderRadius: "8px",
                         border: "1px solid #b8afaf71",
                         outlineStyle: "none",

@@ -10,14 +10,23 @@ interface FieldProps extends InputProps {
   icons?: ReactNode;
   inputName?: string;
   inputType?: "Password" | "Text";
+  className?: string;
 }
 
 const InputText = (props: FieldProps) => {
-  const { label, placeholder, style, icons, inputType, ...otherProps } = props;
+  const {
+    label,
+    placeholder,
+    style,
+    icons,
+    inputType,
+    className,
+    ...otherProps
+  } = props;
   const [field] = useField(otherProps as any);
 
   return (
-    <div>
+    <div className={className}>
       <div>
         <label
           htmlFor="email"

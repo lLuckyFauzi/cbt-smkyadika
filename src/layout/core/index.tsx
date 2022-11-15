@@ -56,12 +56,17 @@ function ErrorCheck() {
 
 function CheckToken() {
   const publicCtx = useContext(PublicContext);
+  const router = useRouter();
   useEffect(() => {
     const token = localStorage.getItem("tokenpublic");
-    if (token) {
+    if (!token) {
+      return;
+    } else {
       publicCtx.setIsToken(token);
     }
+
     if (publicCtx.isToken === "" || undefined) {
+      router.push("/login");
       return;
     } else {
       const decode: User = JWT(publicCtx.isToken);
@@ -101,7 +106,7 @@ const LayoutDefault = (props: AppProps) => {
       }}
     >
       <ErrorCheck />
-      <CheckToken />
+      {/* <CheckToken /> */}
       <Layout
         style={{
           backgroundColor: "white",
