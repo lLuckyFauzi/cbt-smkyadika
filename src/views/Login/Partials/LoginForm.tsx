@@ -209,7 +209,7 @@ const LoginForm = () => {
         }}
       >
         <Text size={15} style={{ fontWeight: 200 }}>
-          Powered by{" "}
+          Powered by
         </Text>
         <Text size={15} style={{ fontWeight: 700, color: "#023E7D" }}>
           Team Teaching Factory
