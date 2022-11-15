@@ -9,7 +9,7 @@ import { PublicContext } from "../../layout/core";
 const Dashboard = () => {
   const [departement, setDepartement] = useState("");
   const ctxPublic = useContext(PublicContext);
-  console.log(ctxPublic.userData);
+  console.log(ctxPublic?.userData);
 
   return (
     <div

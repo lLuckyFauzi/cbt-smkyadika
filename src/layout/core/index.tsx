@@ -54,12 +54,10 @@ function CheckToken() {
   const publicCtx = useContext(PublicContext);
   const router = useRouter();
   useEffect(() => {
-    const token = localStorage.getItem("tokenpublic");
+    const token = localStorage?.getItem("tokenpublic");
     if (!token) {
       router.push("/login");
       return;
-    } else {
-      publicCtx.setIsToken(token);
     }
 
     if (publicCtx.isToken === "" || undefined) {

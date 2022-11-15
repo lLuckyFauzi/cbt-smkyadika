@@ -24,8 +24,9 @@ const LoginForm = () => {
 
   const loginMutation = useMutation(SubmitLogin, {
     onSuccess: async (values) => {
-      const token = values?.data.token;
+      const token = values?.data?.token;
       localStorage.setItem("tokenpublic", token);
+      ctxPublic.setIsToken(token);
       ctxPublic.setIsLogin(true);
       notification.success({
         message: "Login berhasil!",
