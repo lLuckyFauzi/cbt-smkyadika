@@ -8,7 +8,13 @@ import { ReactQueryDevtools } from "react-query/devtools";
 
 function MyApp(props: AppProps) {
   const layout = LayoutDefault(props);
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 2000,
+      },
+    },
+  });
   return (
     <>
       <QueryClientProvider client={queryClient}>

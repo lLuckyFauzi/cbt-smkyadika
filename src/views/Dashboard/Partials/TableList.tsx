@@ -1,4 +1,11 @@
-import React, { ReactNode, useContext, useEffect } from "react";
+import React, {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { notification, Popconfirm, Spin, Table } from "antd";
 import Text from "../../../components/Typography/Text";
 import BtnPrimary from "../../../components/Button/Primary/Primary";
@@ -13,9 +20,12 @@ import Moment from "moment";
 import { PublicContext } from "../../../layout/core";
 import UseDeleteTable from "../../../mutations/useDeleteTable";
 import { useMutation, useQueryClient } from "react-query";
+
 interface TableListProps {
   departement?: string;
+  setTotal: React.Dispatch<React.SetStateAction<number | undefined>>;
 }
+
 interface DataType {
   key: string;
   namaMapel: string;
@@ -27,37 +37,34 @@ interface DataType {
 }
 
 const TableData = (props: TableListProps) => {
-  const { departement } = props;
-  const EmbedLink = EmbedData("embed-link");
+  const { departement, setTotal } = props;
+  const queryClient = useQueryClient();
+  const EmbedLink = EmbedData("embed");
+  const ctxPublic = useContext(PublicContext);
 
   function fileringData(departement: string | undefined) {
     const material = EmbedLink.data?.filter((data) => {
-      const departementFilter = data.jurusan.jurusan === departement;
+      const departementFilter = data?.jurusan?.jurusan === departement;
       return departementFilter;
     });
-
     return material;
   }
 
   const embedLinkData = fileringData(departement);
-  const ctxPublic = useContext(PublicContext);
-  const queryClient = useQueryClient();
 
   useEffect(() => {
-    ctxPublic.setTotalMaterial(embedLinkData?.length);
-  }, [departement]);
+    setTotal(embedLinkData?.length);
+  }, [embedLinkData]);
 
   const deleteTableMutation = useMutation(UseDeleteTable, {
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: async (data) => {
       notification.success({
         message: "Embed deleted",
       });
     },
-    onSettled: (data) => {
-      console.log(data);
+    onSettled: async (data) => {
       if (data) {
-        queryClient.invalidateQueries("embed-link");
+        await queryClient.invalidateQueries("embed");
       }
     },
     onError: (err) => {
@@ -162,7 +169,7 @@ const TableData = (props: TableListProps) => {
       {/* <SelectCompo defaultValue="Jake" placeholder="Hello">
         <Option>Jake</Option>
       </SelectCompo> */}
-      <Spin spinning={false} tip="Loading...">
+      <Spin spinning={ctxPublic.isLoading} tip="Loading...">
         <Table
           className={TableStyle.table}
           style={{

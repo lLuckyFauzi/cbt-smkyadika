@@ -7,30 +7,24 @@ import Header from "../container/Header/Header";
 import Sider from "../container/Sider/Sider";
 import JWT from "jwt-decode";
 
-interface GlobalContext {
+export const PublicContext = React.createContext<{
   isLogin: boolean;
   setIsLogin: (value: boolean) => void;
   isLoading: boolean;
   setIsLoading: (value: boolean) => void;
   isToken: string;
   setIsToken: (value: string) => void;
-  totalMaterial: number | undefined;
-  setTotalMaterial: (value: number | undefined) => void;
   userData: User | undefined;
   setUserData: (value: User | undefined) => void;
   idUser: unknown;
   setIdUser: (value: string) => void;
-}
-
-export const PublicContext = React.createContext<GlobalContext>({
+}>({
   isLogin: false,
   setIsLogin: (_value: boolean) => {},
   setIsLoading: (_value: boolean) => {},
   isLoading: false,
   isToken: "",
   setIsToken: (_value: string) => {},
-  totalMaterial: 0,
-  setTotalMaterial: (_value: number | undefined) => {},
   userData: { id: "", username: "", nama: "" },
   setUserData: (_value: User | undefined) => {},
   idUser: "",
@@ -89,7 +83,6 @@ const LayoutDefault = (props: AppProps) => {
   const [isToken, setIsToken] = useState<string>("");
   const [idUser, setIdUser] = useState<unknown>();
   const [userData, setUserData] = useState<User>();
-  const [totalMaterial, setTotalMaterial] = useState<number | undefined>(0);
 
   return (
     <PublicContext.Provider
@@ -100,8 +93,6 @@ const LayoutDefault = (props: AppProps) => {
         isLoading,
         isToken,
         setIsToken,
-        totalMaterial,
-        setTotalMaterial,
         userData,
         setUserData,
         idUser,

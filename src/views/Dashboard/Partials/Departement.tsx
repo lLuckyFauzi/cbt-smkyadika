@@ -8,10 +8,11 @@ interface ImageProps {
   onClick?: () => void;
   title: string;
   departement?: string;
+  total?: number | undefined;
 }
 
 const Departement = (props: ImageProps) => {
-  const { image, onClick, title, departement } = props;
+  const { image, onClick, title, departement, total } = props;
   const ctxPublic = useContext(PublicContext);
 
   return (
@@ -62,7 +63,7 @@ const Departement = (props: ImageProps) => {
             fontSize: "10px",
           }}
         >
-          {departement === title && ctxPublic.totalMaterial + " Mata Pelajaran"}
+          {departement === title && total + " Mata Pelajaran"}
         </p>
       </div>
     </div>
